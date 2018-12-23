@@ -1,0 +1,15 @@
+# Ignore the gradle cache.
+.gradle
+
+# Ignore build directories.
+build/
+out/
+target/
+.DS_Store
+
+# Ignore idea files.
+*.iml
+*.ipr
+*.iws
+/.idea
+
