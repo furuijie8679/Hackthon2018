@@ -1,20 +1,30 @@
 apply plugin: 'idea'
 apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
-allprojects {
-    version = '1.0'
-    group = 'ghost'
+group = 'Ghost'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
 
-    repositories {   // repositories for Jar's you access in your code
-        google()
-        jcenter()
-        mavenLocal()
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
+    repositories {
         mavenCentral()
     }
-
-    configurations.all {
-        resolutionStrategy {
-        	failOnVersionConflict()
-        }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
