@@ -13,6 +13,9 @@ repositories {
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile group: 'com.google.guava', name: 'guava', version: '27.0.1-jre'
+    compile group: 'io.sgr', name: 's2-geometry-library-java', version: '1.0.0'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
 }
 
 
