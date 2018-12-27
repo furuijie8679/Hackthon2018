@@ -8,21 +8,28 @@ import javax.persistence.Id;
 @Entity // Tells Hibernate to make a table for Entity.
 public class Comment {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)// Primary key
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)// Primary key
+    private Integer id;
     private String content;
     private double lat;
     private double lng;
     private long timestamp;
     private String creatorClientUuid;
-    private String l15S2CellToken;
+    private String cellToken;
 
+    public String getCellToken() {
+        return cellToken;
+    }
 
-    public String getId() {
+    public void setCellToken(String cellToken) {
+        this.cellToken = cellToken;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -30,47 +37,39 @@ public class Comment {
         return content;
     }
 
-    public double getLat() {
-        return lat;
-    }
-
-    public double getLng() {
-        return lng;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public String getCreatorClientUuid() {
-        return creatorClientUuid;
-    }
-
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public double getLat() {
+        return lat;
     }
 
     public void setLat(double lat) {
         this.lat = lat;
     }
 
+    public double getLng() {
+        return lng;
+    }
+
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
     }
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
+    public String getCreatorClientUuid() {
+        return creatorClientUuid;
+    }
+
     public void setCreatorClientUuid(String creatorClientUuid) {
         this.creatorClientUuid = creatorClientUuid;
-    }
-
-    public String getL15S2CellToken() {
-        return l15S2CellToken;
-    }
-
-    public void setL15S2CellToken(String l15S2CellToken) {
-        this.l15S2CellToken = l15S2CellToken;
     }
 }
