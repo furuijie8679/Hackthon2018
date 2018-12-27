@@ -1,6 +1,14 @@
 package ghost.svc.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity // Tells Hibernate to make a table for Entity.
 public class Comment {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)// Primary key
     private String id;
     private String content;
     private double lat;
@@ -8,6 +16,7 @@ public class Comment {
     private long timestamp;
     private String creatorClientUuid;
     private String l15S2CellToken;
+
 
     public String getId() {
         return id;

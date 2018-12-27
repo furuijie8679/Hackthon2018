@@ -91,3 +91,6 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+launch.json
+.classpath
+settings.json
