@@ -6,6 +6,7 @@ import ghost.svc.db.InMemoryCommentsDao;
 import ghost.svc.model.Comment;
 import ghost.svc.model.PostCommentRequest;
 import ghost.svc.model.ex.CommentNotFoundException;
+import ghost.svc.service.CommentsQueryService;
 import ghost.svc.utils.GeoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ import java.util.Optional;
 public class CommentController {
 
     @Autowired
-    CommentRepository commentRepository;
+    CommentsQueryService commentsQueryService;
 
     /**
      * When client make comments.
@@ -37,26 +38,28 @@ public class CommentController {
         toSave.setLng(request.getLng());
         toSave.setTimestamp(System.currentTimeMillis());
         toSave.setCellToken(GeoUtils.s2CellToken(request.getLat(), request.getLng()));
-
-        Comment toReturn = commentRepository.save(toSave);
+        Comment toReturn = commentsQueryService.makeComment(toSave);
         return toReturn;
     }
 
+
+    /**
+     * @param lat latitude
+     * @param lng longitude
+     * @param limit pageSize
+     * @param pageToken pageIndex from zero
+     * @return list of comments
+     */
     @GetMapping("/comments/query")
     public List<Comment> viewComments(@RequestParam("lat") final double lat,
                                       @RequestParam("lng") final double lng,
                                       @RequestParam("limit") final int limit,
-                                      @RequestParam("pageToken") final String pageToken) {
-        String s2cellToken = GeoUtils.s2CellToken(lat, lng);
-        return commentRepository.findAllByCellToken(s2cellToken);
+                                      @RequestParam("pageToken") final int pageToken) {
+        return commentsQueryService.viewComments(lat, lng, limit, pageToken);
     }
 
     @GetMapping("/comments/get/{id}")
-    public Comment viewCommentById(@PathVariable Integer id) {
-        Optional<Comment> toReturn = commentRepository.findById(id);
-        if (!toReturn.isPresent()) {
-            throw new CommentNotFoundException("cannot find comment by id " + id);
-        }
-        return toReturn.get();
+    public Comment viewCommentById(@PathVariable Integer id, int limit, String pageToken) {
+        return commentsQueryService.viewCommentById(id, limit, pageToken);
     }
 }
