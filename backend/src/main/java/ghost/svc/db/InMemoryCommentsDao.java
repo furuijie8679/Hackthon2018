@@ -26,13 +26,13 @@ public class InMemoryCommentsDao implements CommentsDao {
     @Override
     public Comment save(Comment comment) {
         checkNotNull(comment);
-        checkArgument(StringUtils.isBlank(comment.getId()));
+        //checkArgument(StringUtils.isBlank(comment.getId()));
 
         String commentId = COMMENT_ID_PREFIX + UUID.randomUUID().toString();
-        comment.setId(commentId);
+        //comment.setId(commentId);
 
         commentsMap.put(commentId, comment);
-        commentsMapByS2Cell.put(comment.getL15S2CellToken(), comment);
+        commentsMapByS2Cell.put(comment.getCellToken(), comment);
         return comment;
     }
 
