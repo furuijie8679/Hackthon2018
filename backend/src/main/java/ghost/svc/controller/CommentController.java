@@ -1,13 +1,11 @@
-package ghost.svc;
+package ghost.svc.controller;
 
-import ghost.svc.db.CommentRepository;
-import ghost.svc.db.CommentsDao;
-import ghost.svc.db.InMemoryCommentsDao;
-import ghost.svc.model.Comment;
+import ghost.svc.model.Entity.Comment;
 import ghost.svc.model.PostCommentRequest;
-import ghost.svc.model.ex.CommentNotFoundException;
 import ghost.svc.service.CommentsQueryService;
 import ghost.svc.utils.GeoUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class CommentController {
 
     @Autowired
-    CommentsQueryService commentsQueryService;
+    private CommentsQueryService commentsQueryService;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * When client make comments.
@@ -31,6 +29,7 @@ public class CommentController {
      */
     @PostMapping("/comments/post")
     public Comment makeComment(@RequestBody final PostCommentRequest request) {
+        logger.info("latitude: " + request.getLat() + ", " + "longtitude: " + request.getLng());
         Comment toSave = new Comment();
         toSave.setContent(request.getContent());
         toSave.setCreatorClientUuid(request.getClientUuid());
@@ -44,9 +43,9 @@ public class CommentController {
 
 
     /**
-     * @param lat latitude
-     * @param lng longitude
-     * @param limit pageSize
+     * @param lat       latitude
+     * @param lng       longitude
+     * @param limit     pageSize
      * @param pageToken pageIndex from zero
      * @return list of comments
      */

@@ -1,4 +1,4 @@
-package ghost.svc.model;
+package ghost.svc.model.Entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

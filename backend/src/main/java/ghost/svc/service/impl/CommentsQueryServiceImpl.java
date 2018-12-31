@@ -1,8 +1,7 @@
 package ghost.svc.service.impl;
 
 import ghost.svc.db.CommentRepository;
-import ghost.svc.model.Comment;
-import ghost.svc.model.PostCommentRequest;
+import ghost.svc.model.Entity.Comment;
 import ghost.svc.model.ex.CommentNotFoundException;
 import ghost.svc.service.CommentsQueryService;
 import ghost.svc.utils.GeoUtils;
@@ -10,13 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
