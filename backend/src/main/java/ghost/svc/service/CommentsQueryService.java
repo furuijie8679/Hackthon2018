@@ -1,7 +1,6 @@
 package ghost.svc.service;
 
-import ghost.svc.model.Comment;
-import ghost.svc.model.PostCommentRequest;
+import ghost.svc.model.Entity.Comment;
 
 import java.util.List;
 

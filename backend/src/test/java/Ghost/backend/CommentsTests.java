@@ -2,7 +2,7 @@ package Ghost.backend;
 
 import ghost.svc.GhostApplication;
 import ghost.svc.db.CommentRepository;
-import ghost.svc.model.Comment;
+import ghost.svc.model.Entity.Comment;
 import ghost.svc.service.CommentsQueryService;
 import ghost.svc.utils.GeoUtils;
 import org.junit.Test;
@@ -11,12 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GhostApplication.class)
-public class BackendApplicationTests {
+public class CommentsTests {
 
 	@Autowired
 	CommentRepository commentRepository;
@@ -48,7 +47,7 @@ public class BackendApplicationTests {
 		toSave.setCellToken(GeoUtils.s2CellToken(50.00, 50.00));
 
 		List<Comment> results = commentsQueryService.viewComments(50, 50, 10, 1);
-		System.out.println(results.get(0).getCellToken());
+		//System.out.println(results.get(0).getCellToken());
 	}
 
 }
